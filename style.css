@@ -191,7 +191,14 @@ h1 {
     font-style: italic;
 }
 
-#generateBtn {
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 2rem;
+}
+
+.action-btn {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -199,15 +206,40 @@ h1 {
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
+    flex: 1;
+    max-width: 150px;
 }
 
-#generateBtn:hover {
+.action-btn:hover {
     background-color: #45a049;
 }
 
-#generateBtn:active {
+.action-btn:active {
     transform: translateY(1px);
+}
+
+#generateFiveBtn {
+    background-color: #2196F3; /* 5게임 버튼은 파란색으로 구분 */
+}
+
+#generateFiveBtn:hover {
+    background-color: #1976D2;
+}
+
+.game-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 10px;
+    flex-wrap: wrap;
+}
+
+body.dark-mode .game-row {
+    background-color: rgba(255,255,255,0.05);
 }
 
 .footer {

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const generateBtn = document.getElementById('generateBtn');
+    const generateOneBtn = document.getElementById('generateOneBtn');
+    const generateFiveBtn = document.getElementById('generateFiveBtn');
     const resultDiv = document.getElementById('result');
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
@@ -41,48 +42,64 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 
-    generateBtn.addEventListener('click', generateLottoNumbers);
+    generateOneBtn.addEventListener('click', () => generateLotto(1));
+    generateFiveBtn.addEventListener('click', () => generateLotto(5));
 
-    function generateLottoNumbers() {
-        generateBtn.disabled = true; // 버튼 비활성화
-        generateBtn.textContent = '추첨 중...';
+    function generateLotto(count) {
+        // 버튼 비활성화
+        generateOneBtn.disabled = true;
+        generateFiveBtn.disabled = true;
         
+        resultDiv.innerHTML = ''; // 기존 결과 초기화
+
+        // 요청한 횟수만큼 게임 생성
+        for (let i = 0; i < count; i++) {
+            setTimeout(() => {
+                const numbers = getLottoNumbers();
+                const row = document.createElement('div');
+                row.classList.add('game-row');
+                resultDiv.appendChild(row);
+
+                // 각 번호 표시
+                numbers.forEach((num, index) => {
+                    setTimeout(() => {
+                        const ball = createBall(num);
+                        row.appendChild(ball);
+                    }, index * 100); // 공 하나당 0.1초
+                });
+
+                // 모든 게임 생성이 끝났는지 확인하여 버튼 활성화
+                if (i === count - 1) {
+                    setTimeout(() => {
+                        generateOneBtn.disabled = false;
+                        generateFiveBtn.disabled = false;
+                    }, 800);
+                }
+            }, i * 300); // 각 게임 줄마다 0.3초 간격
+        }
+    }
+
+    function getLottoNumbers() {
         const numbers = new Set();
         while (numbers.size < 6) {
             const num = Math.floor(Math.random() * 45) + 1;
             numbers.add(num);
         }
-
-        const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
-        displayNumbers(sortedNumbers);
+        return Array.from(numbers).sort((a, b) => a - b);
     }
 
-    function displayNumbers(numbers) {
-        resultDiv.innerHTML = ''; // 기존 결과 초기화
+    function createBall(num) {
+        const ball = document.createElement('div');
+        ball.classList.add('ball');
+        ball.textContent = num;
+        
+        // 번호 대역별 색상 클래스 추가
+        if (num <= 10) ball.classList.add('range-1');
+        else if (num <= 20) ball.classList.add('range-2');
+        else if (num <= 30) ball.classList.add('range-3');
+        else if (num <= 40) ball.classList.add('range-4');
+        else ball.classList.add('range-5');
 
-        numbers.forEach((num, index) => {
-            setTimeout(() => {
-                const ball = document.createElement('div');
-                ball.classList.add('ball');
-                ball.textContent = num;
-                
-                // 번호 대역별 색상 클래스 추가
-                if (num <= 10) ball.classList.add('range-1');
-                else if (num <= 20) ball.classList.add('range-2');
-                else if (num <= 30) ball.classList.add('range-3');
-                else if (num <= 40) ball.classList.add('range-4');
-                else ball.classList.add('range-5');
-
-                resultDiv.appendChild(ball);
-
-                // 마지막 공이 표시된 후 버튼 다시 활성화
-                if (index === numbers.length - 1) {
-                    setTimeout(() => {
-                        generateBtn.disabled = false;
-                        generateBtn.textContent = '번호 생성하기';
-                    }, 200);
-                }
-            }, index * 200); // 0.2초 간격으로 하나씩 표시
-        });
+        return ball;
     }
 });
