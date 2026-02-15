@@ -1,6 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generateBtn');
     const resultDiv = document.getElementById('result');
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // 저장된 테마 불러오기
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️';
+    }
+
+    // 테마 전환 이벤트
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
 
     generateBtn.addEventListener('click', generateLottoNumbers);
 
