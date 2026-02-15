@@ -23,14 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Buy Me a Coffee 버튼 기능
     buyCoffeeBtn.addEventListener('click', () => {
-        // 여기에 본인의 Buy Me a Coffee 주소를 입력하세요 (예: https://www.buymeacoffee.com/username)
-        const coffeeLink = "https://www.buymeacoffee.com/username"; 
-        
-        if (coffeeLink === "https://www.buymeacoffee.com/username") {
-            alert("후원 링크가 아직 설정되지 않았습니다.");
-        } else {
-            window.open(coffeeLink, '_blank');
-        }
+        const coffeeLink = "https://buymeacoffee.com/parksungmin"; 
+        window.open(coffeeLink, '_blank');
     });
 
     // 모달 외부 클릭 시 닫기
