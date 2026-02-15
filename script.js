@@ -4,6 +4,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
 
+    // 후원 모달 관련 요소
+    const donateBtn = document.getElementById('donateBtn');
+    const donateModal = document.getElementById('donateModal');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // 후원 버튼 클릭 시 모달 열기
+    donateBtn.addEventListener('click', () => {
+        donateModal.style.display = 'block';
+    });
+
+    // 닫기 버튼 클릭 시 모달 닫기
+    closeBtn.addEventListener('click', () => {
+        donateModal.style.display = 'none';
+    });
+
+    // 모달 외부 클릭 시 닫기
+    window.addEventListener('click', (event) => {
+        if (event.target === donateModal) {
+            donateModal.style.display = 'none';
+        }
+    });
+
     // 저장된 테마 불러오기
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
