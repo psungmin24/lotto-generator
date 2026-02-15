@@ -151,25 +151,16 @@ body.dark-mode .control-btn:hover {
     background-color: #e0e0e0;
 }
 
-.toss-btn {
-    background-color: #3182f6;
-    color: white;
+.coffee-btn {
+    background-color: #FFDD00;
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.toss-btn:hover {
-    background-color: #1b64da;
-}
-
-.copy-message {
-    font-size: 0.9rem;
-    color: #4CAF50;
-    height: 20px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.copy-message.show {
-    opacity: 1;
+.coffee-btn:hover {
+    background-color: #FFEA00;
+    transform: translateY(-2px);
 }
 
 .container {
