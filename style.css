@@ -209,3 +209,13 @@ h1 {
 #generateBtn:active {
     transform: translateY(1px);
 }
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: var(--placeholder-color);
+    opacity: 0.7;
+}
