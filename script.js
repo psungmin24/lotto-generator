@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const donateBtn = document.getElementById('donateBtn');
     const donateModal = document.getElementById('donateModal');
     const closeBtn = document.querySelector('.close-btn');
+    const copyAccountBtn = document.getElementById('copyAccountBtn');
+    const openTossBtn = document.getElementById('openTossBtn');
+    const copyMessage = document.getElementById('copyMessage');
 
     // 후원 버튼 클릭 시 모달 열기
     donateBtn.addEventListener('click', () => {
@@ -18,6 +21,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // 닫기 버튼 클릭 시 모달 닫기
     closeBtn.addEventListener('click', () => {
         donateModal.style.display = 'none';
+        copyMessage.classList.remove('show');
+    });
+
+    // 계좌번호 복사 기능
+    copyAccountBtn.addEventListener('click', () => {
+        // 여기에 본인의 계좌번호를 입력하세요
+        const accountText = "카카오뱅크 3333-XX-XXXXXX (예금주: 홍길동)";
+        
+        navigator.clipboard.writeText(accountText).then(() => {
+            copyMessage.textContent = "계좌번호가 복사되었습니다!";
+            copyMessage.classList.add('show');
+            setTimeout(() => {
+                copyMessage.classList.remove('show');
+            }, 2000);
+        }).catch(err => {
+            console.error('복사 실패:', err);
+            copyMessage.textContent = "복사에 실패했습니다.";
+            copyMessage.classList.add('show');
+        });
+    });
+
+    // 토스 송금 버튼
+    openTossBtn.addEventListener('click', () => {
+        // 여기에 본인의 토스 익명 송금 링크를 입력하세요 (예: https://toss.me/your_id)
+        const tossLink = "https://toss.me/your_id"; 
+        
+        if (tossLink === "https://toss.me/your_id") {
+            alert("토스 송금 링크가 설정되지 않았습니다.");
+        } else {
+            window.open(tossLink, '_blank');
+        }
     });
 
     // 모달 외부 클릭 시 닫기

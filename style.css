@@ -26,44 +26,46 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.theme-btn {
+/* 상단 컨트롤 버튼 그룹 */
+.top-controls {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 50%;
-    transition: transform 0.2s;
+    display: flex;
+    gap: 10px;
     z-index: 100;
 }
 
-.theme-btn:hover {
+.control-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: transform 0.2s, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
     transform: scale(1.1);
     background-color: rgba(0,0,0,0.1);
 }
 
-body.dark-mode .theme-btn:hover {
+body.dark-mode .control-btn:hover {
     background-color: rgba(255,255,255,0.1);
 }
 
 .donate-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    font-size: 1rem;
+    border-radius: 20px;
+    padding: 8px 16px;
     background-color: #ff4081;
     color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    transition: transform 0.2s, background-color 0.2s;
-    z-index: 100;
     font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .donate-btn:hover {
@@ -71,6 +73,7 @@ body.dark-mode .theme-btn:hover {
     transform: translateY(-2px);
 }
 
+/* 모달 스타일 */
 .modal {
     display: none;
     position: fixed;
@@ -86,7 +89,7 @@ body.dark-mode .theme-btn:hover {
 
 .modal-content {
     background-color: var(--container-bg);
-    margin: 10% auto;
+    margin: 15% auto;
     padding: 2rem;
     border-radius: 15px;
     width: 90%;
@@ -119,18 +122,54 @@ body.dark-mode .theme-btn:hover {
     text-decoration: none;
 }
 
-.qr-container img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    margin-top: 1rem;
+.donate-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-.qr-desc {
-    font-size: 0.9rem;
+.donate-info {
     color: var(--placeholder-color);
-    margin-top: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.modal-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.2s;
+    font-weight: bold;
+}
+
+.modal-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.toss-btn {
+    background-color: #3182f6;
+    color: white;
+}
+
+.toss-btn:hover {
+    background-color: #1b64da;
+}
+
+.copy-message {
+    font-size: 0.9rem;
+    color: #4CAF50;
+    height: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.copy-message.show {
+    opacity: 1;
 }
 
 .container {
@@ -155,7 +194,7 @@ h1 {
     gap: 10px;
     margin-bottom: 2rem;
     flex-wrap: wrap;
-    min-height: 60px; /* 공 크기만큼 확보 */
+    min-height: 60px;
     align-items: center;
 }
 
@@ -171,6 +210,28 @@ h1 {
     font-size: 1.2rem;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     animation: popIn 0.3s ease-out;
+}
+
+/* 모바일 화면 최적화 */
+@media (max-width: 480px) {
+    .ball {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .game-row {
+        gap: 5px; /* 모바일에서 간격 줄임 */
+        padding: 5px;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
 }
 
 @keyframes popIn {
@@ -220,7 +281,7 @@ h1 {
 }
 
 #generateFiveBtn {
-    background-color: #2196F3; /* 5게임 버튼은 파란색으로 구분 */
+    background-color: #2196F3;
 }
 
 #generateFiveBtn:hover {
