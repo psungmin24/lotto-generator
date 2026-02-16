@@ -27,6 +27,56 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(coffeeLink, '_blank');
     });
 
+    // 추천(좋아요) 기능
+    const likeBtn = document.getElementById('likeBtn');
+    const likeCountSpan = document.getElementById('likeCount');
+    
+    // 초기 좋아요 수 설정 (로컬 저장소 또는 기본값)
+    let likeCount = parseInt(localStorage.getItem('likeCount')) || 0;
+    let isLiked = localStorage.getItem('isLiked') === 'true';
+
+    updateLikeDisplay();
+
+    likeBtn.addEventListener('click', () => {
+        if (!isLiked) {
+            likeCount++;
+            isLiked = true;
+            localStorage.setItem('isLiked', 'true');
+        } else {
+            likeCount--; // 다시 누르면 취소
+            isLiked = false;
+            localStorage.setItem('isLiked', 'false');
+        }
+        
+        localStorage.setItem('likeCount', likeCount);
+        updateLikeDisplay();
+        
+        // 하트 애니메이션 효과
+        createHeartAnimation();
+    });
+
+    function updateLikeDisplay() {
+        if (isLiked) {
+            likeBtn.classList.add('liked');
+            likeBtn.innerHTML = `👍 추천함 <span id="likeCount">${likeCount}</span>`;
+        } else {
+            likeBtn.classList.remove('liked');
+            likeBtn.innerHTML = `👍 이 사이트 추천하기 <span id="likeCount">${likeCount}</span>`;
+        }
+    }
+
+    function createHeartAnimation() {
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 80 + 10 + '%';
+        likeBtn.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 1000);
+    }
+
     // 모달 외부 클릭 시 닫기
     window.addEventListener('click', (event) => {
         if (event.target === donateModal) {

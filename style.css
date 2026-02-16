@@ -21,9 +21,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     transition: background-color 0.3s, color 0.3s;
+    flex-direction: column; /* 세로 정렬을 위해 flex-direction 변경 */
+    padding: 20px 0; /* 상하 여백 추가 */
 }
 
 /* 상단 컨트롤 버튼 그룹 */
@@ -183,6 +185,7 @@ body.dark-mode .control-btn:hover {
     max-width: 600px;
     width: 90%;
     transition: background-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 20px; /* 컨테이너 간 간격 */
 }
 
 h1 {
@@ -229,10 +232,16 @@ h1 {
 
     .container {
         padding: 1.5rem;
+        width: 85%; /* 모바일에서 너비 약간 줄임 */
     }
 
     h1 {
         font-size: 1.5rem;
+    }
+    
+    .top-controls {
+        top: 10px;
+        right: 10px;
     }
 }
 
@@ -306,11 +315,95 @@ body.dark-mode .game-row {
 }
 
 .footer {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static; /* fixed에서 static으로 변경하여 문서 흐름에 따름 */
+    margin-top: 20px;
     font-size: 0.8rem;
     color: var(--placeholder-color);
     opacity: 0.7;
+    text-align: center;
+}
+
+/* 추천 버튼 스타일 */
+.recommend-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.like-btn {
+    background-color: white;
+    border: 2px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #555;
+    position: relative;
+    overflow: visible;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.like-btn:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.05);
+}
+
+.like-btn.liked {
+    background-color: #ff4081;
+    color: white;
+    border-color: #ff4081;
+}
+
+.like-btn.liked:hover {
+    background-color: #f50057;
+}
+
+#likeCount {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+body.dark-mode .like-btn {
+    background-color: #333;
+    border-color: #555;
+    color: #ddd;
+}
+
+body.dark-mode .like-btn:hover {
+    background-color: #444;
+}
+
+body.dark-mode .like-btn.liked {
+    background-color: #ff4081;
+    border-color: #ff4081;
+    color: white;
+}
+
+/* 하트 애니메이션 */
+.floating-heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    20% { opacity: 1; transform: translate(-50%, -80%) scale(1.2); }
+    100% { transform: translate(-50%, -200%) scale(1); opacity: 0; }
+}
+
+.giscus-comments {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+body.dark-mode .giscus-comments {
+    border-top-color: #444;
 }
